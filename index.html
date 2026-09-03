@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
+
+button {
+    background: #1434AA;
+    color: white;
+    border: 1px solid #D4AF37;
+    border-radius: 30px;
+    padding: 14px 28px;
+    font-size: 17px;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<audio id="musica" loop>
+    <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<button id="boton" onclick="controlMusica()">
+    ♫ Reproducir música
+</button>
+
+<script>
+const musica = document.getElementById("musica");
+const boton = document.getElementById("boton");
+
+function controlMusica() {
+    if (musica.paused) {
+        musica.play();
+        boton.innerHTML = "❚❚ Pausar música";
+    } else {
+        musica.pause();
+        boton.innerHTML = "♫ Reproducir música";
+    }
+}
+</script>
+
+</body>
+</html>
