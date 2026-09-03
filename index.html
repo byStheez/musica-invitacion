@@ -1,61 +1,127 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-html, body {
-    margin: 0;
-    padding: 0;
-    background: transparent;
-    width: 100%;
-    height: 100%;
-}
-
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial, sans-serif;
-}
-
-button {
-    background: #1434AA;
-    color: white;
-    border: 1px solid #D4AF37;
-    border-radius: 30px;
-    padding: 14px 28px;
-    font-size: 17px;
-    cursor: pointer;
-}
-</style>
-</head>
-
-<body>
-
-<audio id="musica" loop>
-    <source src="musica.mp3" type="audio/mpeg">
-</audio>
-
-<button id="boton" onclick="controlMusica()">
-    ♫ Reproducir música
-</button>
-
-<script>
-const musica = document.getElementById("musica");
-const boton = document.getElementById("boton");
-
-function controlMusica() {
-    if (musica.paused) {
-        musica.play();
-        boton.innerHTML = "❚❚ Pausar música";
-    } else {
-        musica.pause();
-        boton.innerHTML = "♫ Reproducir música";
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Música de la invitación</title>
+  <style>
+    :root{
+      --azul-rey:#123FB8;
+      --azul-profundo:#09236F;
+      --dorado:#D8B45A;
+      --blanco:#FFFFFF;
     }
-}
-</script>
 
+    *{box-sizing:border-box;}
+
+    html, body{
+      margin:0;
+      width:100%;
+      min-height:100%;
+      background:transparent;
+      overflow:hidden;
+    }
+
+    body{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      font-family:Arial, Helvetica, sans-serif;
+      padding:10px;
+    }
+
+    .player{
+      width:min(92vw, 520px);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    #botonMusica{
+      appearance:none;
+      border:1.5px solid var(--dorado);
+      outline:none;
+      color:var(--blanco);
+      background:linear-gradient(135deg, rgba(18,63,184,.98), rgba(9,35,111,.98));
+      border-radius:999px;
+      padding:14px 26px;
+      min-width:250px;
+      font-size:16px;
+      font-weight:600;
+      letter-spacing:.3px;
+      cursor:pointer;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,.08) inset,
+        0 0 18px rgba(255,255,255,.20),
+        0 0 24px rgba(216,180,90,.20);
+      transition:transform .18s ease, box-shadow .18s ease;
+      -webkit-tap-highlight-color:transparent;
+    }
+
+    #botonMusica:hover{
+      transform:translateY(-1px);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,.10) inset,
+        0 0 22px rgba(255,255,255,.28),
+        0 0 28px rgba(216,180,90,.28);
+    }
+
+    #botonMusica:active{transform:scale(.98);}
+    .icono{margin-right:7px;}
+
+    @media (max-width:420px){
+      #botonMusica{
+        min-width:220px;
+        padding:13px 20px;
+        font-size:15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="player">
+    <audio id="musica" preload="auto" loop>
+      <source src="musica.mp3" type="audio/mpeg">
+      Tu navegador no admite reproducción de audio.
+    </audio>
+
+    <button id="botonMusica" type="button" aria-label="Reproducir música">
+      <span class="icono">♫</span>
+      <span id="textoBoton">Comenzar esta historia</span>
+    </button>
+  </div>
+
+  <script>
+    const musica = document.getElementById("musica");
+    const boton = document.getElementById("botonMusica");
+    const texto = document.getElementById("textoBoton");
+
+    boton.addEventListener("click", async () => {
+      try {
+        if (musica.paused) {
+          await musica.play();
+          texto.textContent = "Pausar melodía";
+          boton.setAttribute("aria-label", "Pausar música");
+        } else {
+          musica.pause();
+          texto.textContent = "Continuar la historia";
+          boton.setAttribute("aria-label", "Reproducir música");
+        }
+      } catch (error) {
+        texto.textContent = "Toca de nuevo para reproducir";
+        console.error(error);
+      }
+    });
+
+    musica.addEventListener("play", () => {
+      texto.textContent = "Pausar melodía";
+    });
+
+    musica.addEventListener("pause", () => {
+      if (musica.currentTime > 0) {
+        texto.textContent = "Continuar la historia";
+      }
+    });
+  </script>
 </body>
 </html>
