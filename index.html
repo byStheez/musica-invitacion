@@ -3,146 +3,290 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Música de la invitación</title>
+
   <style>
-    :root{
-      --azul-rey:#123FB8;
-      --azul-profundo:#09236F;
-      --dorado:#D8B45A;
-      --blanco:#FFFFFF;
+    :root {
+      --azul-rey: #123FB8;
+      --azul-profundo: #09236F;
+      --dorado: #D8B45A;
+      --blanco: #FFFFFF;
     }
 
-    *{box-sizing:border-box;}
-
-    html, body{
-      margin:0;
-      width:100%;
-      min-height:100%;
-      background:transparent;
-      overflow:hidden;
+    * {
+      box-sizing: border-box;
     }
 
-    body{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      font-family:Arial, Helvetica, sans-serif;
-      padding:10px;
+    html, body {
+      margin: 0;
+      width: 100%;
+      min-height: 100%;
     }
 
-    .player{
-      width:min(92vw, 520px);
-      display:flex;
-      justify-content:center;
-      align-items:center;
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      padding: 25px;
+
+      font-family: Arial, Helvetica, sans-serif;
+
+      background:
+        radial-gradient(
+          circle at center,
+          #1c55d6 0%,
+          var(--azul-rey) 40%,
+          var(--azul-profundo) 100%
+        );
+
+      color: white;
     }
 
-    #botonMusica{
-      appearance:none;
-      border:1.5px solid var(--dorado);
-      outline:none;
-      color:var(--blanco);
-      background:linear-gradient(135deg, rgba(18,63,184,.98), rgba(9,35,111,.98));
-      border-radius:999px;
-      padding:14px 26px;
-      min-width:250px;
-      font-size:16px;
-      font-weight:600;
-      letter-spacing:.3px;
-      cursor:pointer;
+    .contenedor {
+      width: 100%;
+      max-width: 520px;
+      text-align: center;
+    }
+
+    .titulo {
+      font-size: 28px;
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+
+    .subtitulo {
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 25px;
+      opacity: .9;
+    }
+
+    #botonMusica {
+      appearance: none;
+
+      border: 1.5px solid var(--dorado);
+      outline: none;
+
+      color: var(--blanco);
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(18, 63, 184, .98),
+          rgba(9, 35, 111, .98)
+        );
+
+      border-radius: 999px;
+
+      padding: 15px 30px;
+
+      min-width: 260px;
+
+      font-size: 16px;
+      font-weight: 600;
+
+      cursor: pointer;
+
       box-shadow:
-        0 0 0 1px rgba(255,255,255,.08) inset,
-        0 0 18px rgba(255,255,255,.20),
-        0 0 24px rgba(216,180,90,.20);
-      transition:transform .18s ease, box-shadow .18s ease;
-      -webkit-tap-highlight-color:transparent;
+        0 0 18px rgba(255, 255, 255, .18),
+        0 0 25px rgba(216, 180, 90, .25);
+
+      transition: .2s;
     }
 
-    #botonMusica:hover{
-      transform:translateY(-1px);
+    #botonMusica:hover {
+      transform: scale(1.03);
+    }
+
+    #botonMusica:active {
+      transform: scale(.98);
+    }
+
+    .icono {
+      margin-right: 7px;
+    }
+
+    #mensaje {
+      display: none;
+
+      margin-top: 30px;
+      padding: 22px;
+
+      border: 1px solid rgba(216, 180, 90, .55);
+      border-radius: 20px;
+
+      background: rgba(5, 20, 75, .35);
+
       box-shadow:
-        0 0 0 1px rgba(255,255,255,.10) inset,
-        0 0 22px rgba(255,255,255,.28),
-        0 0 28px rgba(216,180,90,.28);
+        0 0 20px rgba(216, 180, 90, .12);
     }
 
-    #botonMusica:active{transform:scale(.98);}
-    .icono{margin-right:7px;}
+    #mensaje h3 {
+      margin: 0 0 12px 0;
+      font-size: 20px;
+      font-weight: 500;
+    }
 
-    @media (max-width:420px){
-      #botonMusica{
-        min-width:220px;
-        padding:13px 20px;
-        font-size:15px;
+    #mensaje p {
+      margin: 8px 0;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .nota {
+      margin-top: 18px !important;
+      font-size: 13px !important;
+      opacity: .8;
+    }
+
+    .botonInvitacion {
+      display: inline-block;
+
+      margin-top: 8px;
+
+      padding: 12px 25px;
+
+      color: white;
+
+      border: 1.5px solid var(--dorado);
+      border-radius: 999px;
+
+      text-decoration: none;
+
+      font-size: 15px;
+      font-weight: 600;
+
+      background: rgba(18, 63, 184, .65);
+
+      box-shadow:
+        0 0 15px rgba(216, 180, 90, .2);
+
+      transition: .2s;
+    }
+
+    .botonInvitacion:hover {
+      transform: scale(1.03);
+    }
+
+    @media (max-width: 420px) {
+      .titulo {
+        font-size: 24px;
+      }
+
+      #botonMusica {
+        min-width: 225px;
+        padding: 14px 20px;
+        font-size: 15px;
+      }
+
+      #mensaje {
+        padding: 18px;
       }
     }
   </style>
 </head>
+
 <body>
-  <div class="player">
+
+  <div class="contenedor">
+
+    <div class="titulo">
+      ✨ Comienza esta historia
+    </div>
+
+    <div class="subtitulo">
+      Reproduce la melodía y deja que te acompañe
+      mientras recorres esta invitación.
+    </div>
+
     <audio id="musica" preload="auto" loop>
       <source src="musica.mp3" type="audio/mpeg">
       Tu navegador no admite reproducción de audio.
     </audio>
 
-    <button id="botonMusica" type="button" aria-label="Reproducir música">
-      <span class="icono">♫</span>
-      <span id="textoBoton">Comenzar esta historia</span>
+    <button id="botonMusica" type="button">
+      <span class="icono" id="icono">▶</span>
+      <span id="textoBoton">Reproducir melodía</span>
     </button>
+
+
+    <div id="mensaje">
+
+      <h3>
+        🎵 ¡La música ya está sonando!
+      </h3>
+
+      <p>
+        <strong>No cierres esta pestaña.</strong>
+      </p>
+
+      <p>
+        Regresa a la pestaña de la invitación y continúa
+        descubriendo esta historia mientras la melodía
+        te acompaña.
+      </p>
+
+      <p class="nota">
+        Si cerraste la invitación por accidente,
+        puedes abrirla nuevamente aquí:
+      </p>
+
+      <a
+        class="botonInvitacion"
+        href="https://wildcat-fww1tv.my.canva.site/erase-una-vez"
+        target="_blank"
+        rel="noopener noreferrer">
+        ✨ Volver a la invitación
+      </a>
+
+    </div>
+
   </div>
 
+
   <script>
+
     const musica = document.getElementById("musica");
     const boton = document.getElementById("botonMusica");
     const texto = document.getElementById("textoBoton");
+    const icono = document.getElementById("icono");
+    const mensaje = document.getElementById("mensaje");
+
 
     boton.addEventListener("click", async () => {
+
       try {
+
         if (musica.paused) {
+
           await musica.play();
+
+          icono.textContent = "❚❚";
           texto.textContent = "Pausar melodía";
-          boton.setAttribute("aria-label", "Pausar música");
+
+          mensaje.style.display = "block";
+
         } else {
+
           musica.pause();
-          texto.textContent = "Continuar la historia";
-          boton.setAttribute("aria-label", "Reproducir música");
+
+          icono.textContent = "▶";
+          texto.textContent = "Continuar melodía";
+
         }
+
       } catch (error) {
+
         texto.textContent = "Toca de nuevo para reproducir";
-        console.error(error);
+
       }
+
     });
 
-    musica.addEventListener("play", () => {
-      texto.textContent = "Pausar melodía";
-    });
-
-    musica.addEventListener("pause", () => {
-      if (musica.currentTime > 0) {
-        texto.textContent = "Continuar la historia";
-      }
-    });
   </script>
+
 </body>
 </html>
-<div class="mensaje">
-  <h3>🎵 ¡La música ya está sonando!</h3>
-
-  <p>
-    No cierres esta pestaña.<br>
-    Regresa a la pestaña de la invitación y continúa descubriendo
-    esta historia mientras la melodía te acompaña.
-  </p>
-
-  <p class="pequeno">
-    Si cerraste la invitación por accidente:
-  </p>
-
-  <a
-    class="botonInvitacion"
-    href="https://wildcat-fww1tv.my.canva.site/erase-una-vez"
-    target="_blank"
-    rel="noopener noreferrer">
-    ✨ Volver a la invitación
-  </a>
-</div>
