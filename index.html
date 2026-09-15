@@ -1,292 +1,279 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Música de la invitación</title>
+<title>Música de la invitación</title>
 
-  <style>
-    :root {
-      --azul-rey: #123FB8;
-      --azul-profundo: #09236F;
-      --dorado: #D8B45A;
-      --blanco: #FFFFFF;
-    }
+<style>
 
-    * {
-      box-sizing: border-box;
-    }
+* {
+  box-sizing: border-box;
+}
 
-    html, body {
-      margin: 0;
-      width: 100%;
-      min-height: 100%;
-    }
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
 
-    body {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+body {
+  min-height: 100vh;
 
-      padding: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-      font-family: Arial, Helvetica, sans-serif;
+  padding: 25px;
 
-      background:
-        radial-gradient(
-          circle at center,
-          #1c55d6 0%,
-          var(--azul-rey) 40%,
-          var(--azul-profundo) 100%
-        );
+  font-family: Arial, sans-serif;
+  color: white;
+  text-align: center;
 
-      color: white;
-    }
+  background: radial-gradient(
+    circle at center,
+    #2458d5 0%,
+    #123fb8 45%,
+    #09236f 100%
+  );
+}
 
-    .contenedor {
-      width: 100%;
-      max-width: 520px;
-      text-align: center;
-    }
+.contenedor {
+  width: 100%;
+  max-width: 500px;
+}
 
-    .titulo {
-      font-size: 28px;
-      margin-bottom: 10px;
-      font-weight: 500;
-    }
+h1 {
+  font-size: 27px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
 
-    .subtitulo {
-      font-size: 15px;
-      line-height: 1.6;
-      margin-bottom: 25px;
-      opacity: .9;
-    }
+.intro {
+  line-height: 1.6;
+  font-size: 15px;
+  opacity: .9;
+  margin-bottom: 25px;
+}
 
-    #botonMusica {
-      appearance: none;
+#botonMusica {
 
-      border: 1.5px solid var(--dorado);
-      outline: none;
+  border: 1.5px solid #d8b45a;
+  border-radius: 40px;
 
-      color: var(--blanco);
+  background: linear-gradient(
+    135deg,
+    #1747c2,
+    #09276f
+  );
 
-      background:
-        linear-gradient(
-          135deg,
-          rgba(18, 63, 184, .98),
-          rgba(9, 35, 111, .98)
-        );
+  color: white;
 
-      border-radius: 999px;
+  padding: 15px 28px;
 
-      padding: 15px 30px;
+  font-size: 16px;
+  font-weight: bold;
 
-      min-width: 260px;
+  cursor: pointer;
 
-      font-size: 16px;
-      font-weight: 600;
+  box-shadow:
+    0 0 18px rgba(255,255,255,.2),
+    0 0 22px rgba(216,180,90,.25);
+}
 
-      cursor: pointer;
+#mensaje {
 
-      box-shadow:
-        0 0 18px rgba(255, 255, 255, .18),
-        0 0 25px rgba(216, 180, 90, .25);
+  display: none;
 
-      transition: .2s;
-    }
+  margin-top: 28px;
+  padding: 22px 18px;
 
-    #botonMusica:hover {
-      transform: scale(1.03);
-    }
+  border: 1px solid rgba(216,180,90,.65);
+  border-radius: 20px;
 
-    #botonMusica:active {
-      transform: scale(.98);
-    }
+  background: rgba(5,20,75,.45);
 
-    .icono {
-      margin-right: 7px;
-    }
+  animation: aparecer .6s ease;
+}
 
-    #mensaje {
-      display: none;
+@keyframes aparecer {
 
-      margin-top: 30px;
-      padding: 22px;
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
 
-      border: 1px solid rgba(216, 180, 90, .55);
-      border-radius: 20px;
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
-      background: rgba(5, 20, 75, .35);
+}
 
-      box-shadow:
-        0 0 20px rgba(216, 180, 90, .12);
-    }
+#mensaje h2 {
+  margin-top: 0;
+  font-size: 20px;
+}
 
-    #mensaje h3 {
-      margin: 0 0 12px 0;
-      font-size: 20px;
-      font-weight: 500;
-    }
+#mensaje p {
+  font-size: 15px;
+  line-height: 1.6;
+}
 
-    #mensaje p {
-      margin: 8px 0;
-      font-size: 15px;
-      line-height: 1.6;
-    }
+.nota {
+  margin-top: 20px;
+  font-size: 13px !important;
+  opacity: .8;
+}
 
-    .nota {
-      margin-top: 18px !important;
-      font-size: 13px !important;
-      opacity: .8;
-    }
+.botonInvitacion {
 
-    .botonInvitacion {
-      display: inline-block;
+  display: inline-block;
 
-      margin-top: 8px;
+  margin-top: 5px;
 
-      padding: 12px 25px;
+  padding: 12px 24px;
 
-      color: white;
+  border: 1.5px solid #d8b45a;
+  border-radius: 40px;
 
-      border: 1.5px solid var(--dorado);
-      border-radius: 999px;
+  color: white;
+  text-decoration: none;
 
-      text-decoration: none;
+  background: #123fb8;
 
-      font-size: 15px;
-      font-weight: 600;
+  font-weight: bold;
+}
 
-      background: rgba(18, 63, 184, .65);
-
-      box-shadow:
-        0 0 15px rgba(216, 180, 90, .2);
-
-      transition: .2s;
-    }
-
-    .botonInvitacion:hover {
-      transform: scale(1.03);
-    }
-
-    @media (max-width: 420px) {
-      .titulo {
-        font-size: 24px;
-      }
-
-      #botonMusica {
-        min-width: 225px;
-        padding: 14px 20px;
-        font-size: 15px;
-      }
-
-      #mensaje {
-        padding: 18px;
-      }
-    }
-  </style>
+</style>
 </head>
+
 
 <body>
 
-  <div class="contenedor">
+<div class="contenedor">
 
-    <div class="titulo">
-      ✨ Comienza esta historia
-    </div>
+  <h1>✨ Comienza esta historia</h1>
 
-    <div class="subtitulo">
-      Reproduce la melodía y deja que te acompañe
-      mientras recorres esta invitación.
-    </div>
-
-    <audio id="musica" preload="auto" loop>
-      <source src="musica.mp3" type="audio/mpeg">
-      Tu navegador no admite reproducción de audio.
-    </audio>
-
-    <button id="botonMusica" type="button">
-      <span class="icono" id="icono">▶</span>
-      <span id="textoBoton">Reproducir melodía</span>
-    </button>
-
-
-    <div id="mensaje">
-
-      <h3>
-        🎵 ¡La música ya está sonando!
-      </h3>
-
-      <p>
-        <strong>No cierres esta pestaña.</strong>
-      </p>
-
-      <p>
-        Regresa a la pestaña de la invitación y continúa
-        descubriendo esta historia mientras la melodía
-        te acompaña.
-      </p>
-
-      <p class="nota">
-        Si cerraste la invitación por accidente,
-        puedes abrirla nuevamente aquí:
-      </p>
-
-      <a
-        class="botonInvitacion"
-        href="https://wildcat-fww1tv.my.canva.site/erase-una-vez"
-        target="_blank"
-        rel="noopener noreferrer">
-        ✨ Volver a la invitación
-      </a>
-
-    </div>
-
+  <div class="intro">
+    Reproduce la melodía y deja que te acompañe
+    mientras recorres esta invitación.
   </div>
 
 
-  <script>
+  <audio id="musica" loop preload="auto">
 
-    const musica = document.getElementById("musica");
-    const boton = document.getElementById("botonMusica");
-    const texto = document.getElementById("textoBoton");
-    const icono = document.getElementById("icono");
-    const mensaje = document.getElementById("mensaje");
+    <source
+      src="musica.mp3"
+      type="audio/mpeg">
+
+  </audio>
 
 
-    boton.addEventListener("click", async () => {
+  <button id="botonMusica">
 
-      try {
+    <span id="icono">▶</span>
 
-        if (musica.paused) {
+    <span id="texto">
+      Reproducir melodía
+    </span>
 
-          await musica.play();
+  </button>
 
-          icono.textContent = "❚❚";
-          texto.textContent = "Pausar melodía";
 
-          mensaje.style.display = "block";
+  <div id="mensaje">
 
-        } else {
+    <h2>
+      🎵 ¡La música ya está sonando!
+    </h2>
 
-          musica.pause();
+    <p>
+      <strong>No cierres esta pestaña.</strong>
+    </p>
 
-          icono.textContent = "▶";
-          texto.textContent = "Continuar melodía";
+    <p>
+      Regresa a la pestaña de la invitación y continúa
+      descubriendo esta historia mientras la melodía
+      te acompaña.
+    </p>
 
-        }
+    <p class="nota">
+      Si cerraste la invitación por accidente,
+      puedes abrirla nuevamente aquí:
+    </p>
 
-      } catch (error) {
+    <a
+      class="botonInvitacion"
+      href="https://wildcat-fww1tv.my.canva.site/erase-una-vez"
+      target="_blank"
+      rel="noopener noreferrer">
 
-        texto.textContent = "Toca de nuevo para reproducir";
+      ✨ Volver a la invitación
 
-      }
+    </a>
 
-    });
+  </div>
 
-  </script>
+</div>
+
+
+<script>
+
+const musica =
+document.getElementById("musica");
+
+const boton =
+document.getElementById("botonMusica");
+
+const texto =
+document.getElementById("texto");
+
+const icono =
+document.getElementById("icono");
+
+const mensaje =
+document.getElementById("mensaje");
+
+
+boton.addEventListener("click", function() {
+
+  if (musica.paused) {
+
+    musica.play();
+
+  } else {
+
+    musica.pause();
+
+  }
+
+});
+
+
+musica.addEventListener("play", function() {
+
+  icono.textContent = "❚❚";
+
+  texto.textContent =
+  "Pausar melodía";
+
+  mensaje.style.display =
+  "block";
+
+});
+
+
+musica.addEventListener("pause", function() {
+
+  icono.textContent = "▶";
+
+  texto.textContent =
+  "Continuar melodía";
+
+});
+
+</script>
 
 </body>
 </html>
